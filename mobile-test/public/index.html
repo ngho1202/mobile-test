@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>음성 인식 테스트</title>
+    <style>
+        .record-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .record-btn.recording {
+            background-color: #f44336;
+        }
+        #result {
+            margin: 20px;
+            padding: 10px;
+            min-height: 100px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button id="recordButton" class="record-btn">음성 인식 시작</button>
+        <div id="result"></div>
+    </div>
+
+    <script src="stt-test.js"></script>
+    <script>
+        const recordButton = document.getElementById('recordButton');
+        const resultDiv = document.getElementById('result');
+        let isRecording = false;
+
+        recordButton.addEventListener('click', () => {
+            if (!isRecording) {
+                // 음성 인식 시작
+                startRecording();
+                recordButton.textContent = '음성 인식 중지';
+                recordButton.classList.add('recording');
+            } else {
+                // 음성 인식 중지
+                stopRecording();
+                recordButton.textContent = '음성 인식 시작';
+                recordButton.classList.remove('recording');
+            }
+            isRecording = !isRecording;
+        });
+    </script>
+</body>
+</html>
